@@ -1,39 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
-import search_icon from "./assets/favicon.png";
+import {StyleSheet, View} from 'react-native';
 
 export default function App() {
-  const [name, setName] = useState("testName");
-  const [age, setAge] = useState(0);
-
-
-  const showTextWithVariables = (variable, style) => {
-    return <Text style={style}>{variable}</Text>
-  }
+  const [people, setPeople] = useState([
+    {name: "mario1", key: 1},
+    {name: "mario2", key: 2},
+    {name: "mario3", key: 3},
+    {name: "mario4", key: 4},
+    {name: "mario5", key: 5},
+  ])
 
   return (
     <View style={styles.container}>
-      <Text>Enter your name: </Text>
-      <TextInput
-        style={styles.input}
-        placeholder={"Enter your name.."}
-        onChangeText={(value) => setName(value)}
-      />
-      <Text>Enter your age: </Text>
-      <TextInput
-        maxLength={3}
-        keyboardType={"numeric"}
-        style={styles.input}
-        placeholder={"Enter your age.."}
-        onChangeText={(value) => setAge(Number(value))}
-      />
-      <Text>
-        ============================================{"\n"}
-        My name: {showTextWithVariables(name, styles.text)}.{"\n"}
-        I`m: {showTextWithVariables(age === 0 ? "test age" : age, styles.text)}.{"\n"}
-        ============================================
-      </Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -45,17 +24,5 @@ export const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  text: {
-    color: "red",
-    fontWeight: "bold"
-  },
-  input: {
-    borderColor: "#1e9dff",
-    borderWidth: 1,
-    padding: 8,
-    // margin: 10,
-    width: 200,
-    borderRadius: 4
   }
 });
