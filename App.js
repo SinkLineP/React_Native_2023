@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, FlatList, TextInput, Button} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, FlatList} from 'react-native';
 
 export default function App() {
   const [people, setPeople] = useState([
@@ -20,54 +20,20 @@ export default function App() {
     })
   }
 
-  const addNewPeople = (arrayPeoples) => {
-    const [userName, setUserName] = useState("");
-    let key = arrayPeoples.length === 0 ? 0 : arrayPeoples.length;
-
-    const handleChange = (val) => {
-      setPeople({name: val, key: key})
-      setUserName(val)
-    }
-
-    return(
-      <View style={styles.ContainerAddUser}>
-        <TextInput value={userName} onChangeText={(val) => handleChange(val)} placeholder={"Введите имя сотрудника.."} />
-      </View>
-    )
-  }
-
-  const [isShow, setIsShow] = useState(false);
-
   return (
     <View style={styles.container}>
-      {people.length === 0 ? (
-        <>
-          <Text>Больше некого увольнять..</Text>
-          <Text>Заходи позже)</Text>
-          <Text>Хотите добавить новых сотрудников?</Text>
-          <Button title={"Добавить"} onPress={() => setIsShow(true)} />
-
-          {isShow ? (
-            <Text>hi</Text>
-          ) : (
-            addNewPeople(people)
-          )}
-        </>
-      ) : (
-        <>
-          <Text>Выбери, кого хотел бы уволить)</Text>
-          <FlatList
-            numColumns={2}
-            keyExtractor={(item) => item.id}
-            data={people}
-            renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => pressHandler(item.id)}>
-                <Text style={styles.item}>{item.name}</Text>
-              </TouchableOpacity>
-            )}
-          />
-        </>
-      )}
+      <Text>Выбери, кого хотел бы уволить)</Text>
+      {people.length === 0 ? (<Text>Не кого увольнять</Text>) : ""}
+      <FlatList
+        numColumns={2}
+        keyExtractor={(item) => item.id}
+        data={people}
+        renderItem={({ item }) => (
+          <TouchableOpacity onPress={() => pressHandler(item.id)}>
+            <Text style={styles.item}>{item.name}</Text>
+          </TouchableOpacity>
+        )}
+      />
       <StatusBar style="auto" />
     </View>
   );
