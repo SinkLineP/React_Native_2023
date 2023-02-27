@@ -1,30 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, FlatList} from 'react-native';
 
 export default function App() {
   const [people, setPeople] = useState([
-    {name: "mario1", key: 1},
-    {name: "mario2", key: 2},
-    {name: "mario3", key: 3},
-    {name: "mario4", key: 4},
-    {name: "mario5", key: 5},
-    {name: "mario6", key: 6},
-    {name: "mario7", key: 7},
-    {name: "mario8", key: 8},
+    {name: "mario1", id: 1},
+    {name: "mario2", id: 2},
+    {name: "mario3", id: 3},
+    {name: "mario4", id: 4},
+    {name: "mario5", id: 5},
+    {name: "mario6", id: 6},
+    {name: "mario7", id: 7},
+    {name: "mario8", id: 8},
   ])
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        {
-          people.map((item) => (
-            <View key={item.key}>
-              <Text style={styles.item}>{item.name}</Text>
-            </View>
-          ))
-        }
-      </ScrollView>
+
+      <FlatList
+        numColumns={2}
+        keyExtractor={(item) => item.id}
+        data={people}
+        renderItem={({ item }) => (
+          <Text style={styles.item}>{item.name}</Text>
+        )}
+      />
+
       <StatusBar style="auto" />
     </View>
   );
@@ -41,6 +42,7 @@ export const styles = StyleSheet.create({
     marginTop: 24,
     padding: 30,
     backgroundColor: "pink",
-    fontSize: 24
+    fontSize: 24,
+    marginHorizontal: 10,
   }
 });
