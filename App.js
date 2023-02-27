@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
+import search_icon from "./assets/favicon.png";
 
 export default function App() {
   const [name, setName] = useState("testName");
@@ -21,6 +22,7 @@ export default function App() {
       />
       <Text>Enter your age: </Text>
       <TextInput
+        maxLength={3}
         keyboardType={"numeric"}
         style={styles.input}
         placeholder={"Enter your age.."}
